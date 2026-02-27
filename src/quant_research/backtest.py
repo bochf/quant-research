@@ -25,8 +25,6 @@ class Backtest:
         self.calculate_position()
         self.calculate_returns()
         self.equity()
-        self.max_drawdown()
-        self.sharpe_ratio()
         return self._data
 
     def calculate_position(self):
@@ -48,7 +46,7 @@ class Backtest:
         - asset_return: The return of the asset
         - strategy_return: The return of the strategy
         """
-        self._data["asset_return"] = self._data["close"].pct_change()
+        self._data["asset_return"] = self._data["Close"].pct_change()
         self._data["strategy_return"] = (
             self._data["position"] * self._data["asset_return"]
         )

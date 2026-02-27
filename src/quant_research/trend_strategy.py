@@ -99,7 +99,7 @@ class TrendStrategy(Strategy):
         self._data["signal"] = np.where(long_cond, 1, np.where(short_cond, -1, 0))
         return self._data
 
-    def compute_ema(self, span: int, series_name: str = "close", column_name: str = ""):
+    def compute_ema(self, span: int, series_name: str = "Close", column_name: str = ""):
         """
         Compute the EMA for a given span from the close price and add it to the data frame
         Args:
@@ -111,7 +111,7 @@ class TrendStrategy(Strategy):
         if new_name in self._data.columns:
             return
 
-        base_name = series_name or "close"
+        base_name = series_name or "Close"
         if base_name not in self._data.columns:
             raise ValueError(f"Series {base_name} not found in data")
 
@@ -178,9 +178,9 @@ class TrendStrategy(Strategy):
         - trend_strong: True when adx > adx_threshold
         """
         # compute previous high, low, and close
-        high = self._data["high"]
-        low = self._data["low"]
-        close = self._data["close"]
+        high = self._data["High"]
+        low = self._data["Low"]
+        close = self._data["Close"]
         prev_high = high.shift(1)
         prev_low = low.shift(1)
         prev_close = close.shift(1)
@@ -199,12 +199,12 @@ class TrendStrategy(Strategy):
         pdm = np.where(
             (high + low) > (prev_high + prev_low), np.maximum(high - prev_high, 0), 0
         )
-        pdm = pd.Series(pdm, index=close.index)
+        pdm = pd.Series(np.asarray(pdm).ravel(), index=close.index)
         # Negative Directional Movement = Previous Low - Low if Low < Previous Low
         ndm = np.where(
             (prev_high + prev_low) > (high + low), np.maximum(prev_low - low, 0), 0
         )
-        ndm = pd.Series(ndm, index=close.index)
+        ndm = pd.Series(np.asarray(ndm).ravel(), index=close.index)
 
         # compute average true range (ATR)
         # ATR = (ATR * (period - 1) + TR) / period
