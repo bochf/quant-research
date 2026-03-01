@@ -1,7 +1,7 @@
 [project]
 name = "quant-research"
 version = "0.1.0"
-description = "Add your description here"
+description = "Quantitative research backtesting framework with trend-following strategies"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -10,3 +10,13 @@ dependencies = [
     "pandas>=3.0.1",
     "yfinance>=1.2.0",
 ]
+
+[project.scripts]
+quant-research = "quant_research.main:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

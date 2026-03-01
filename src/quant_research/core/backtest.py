@@ -5,7 +5,7 @@ Backtest Engine
 import numpy as np
 import pandas as pd
 
-from quant_research.strategy import Strategy
+from quant_research.strategies import Strategy
 
 
 class Backtest:

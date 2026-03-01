@@ -24,7 +24,7 @@ import pandas as pd
 import numpy as np
 from dataclasses import dataclass
 
-from quant_research.strategy import Strategy
+from quant_research.strategies.strategy import Strategy
 
 
 class TrendStrategy(Strategy):

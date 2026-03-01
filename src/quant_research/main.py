@@ -5,10 +5,8 @@ Using a trend-following strategy
 
 from argparse import ArgumentParser
 
-from quant_research.trend_strategy import TrendStrategy
-from quant_research.backtest import Backtest
-from quant_research.metrics import Metrics
-from quant_research.data import load_data
+from quant_research.core import Backtest, load_data, Metrics
+from quant_research.strategies import TrendStrategy
 
 
 def parse_arguments():
